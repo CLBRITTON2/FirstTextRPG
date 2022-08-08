@@ -42,12 +42,12 @@ namespace FirstTextRPG
 
             if (HitPercent <= 85) // Has an 85% chance to deal damage
             {
-                Game.ChangeColor(ConsoleColor.Red, $"\n{Name} hits {aPlayer.Name} for {HitValue} hitpoints!");
+                ConsoleUtils.ChangeColor(ConsoleColor.Red, $"\n{Name} hits {aPlayer.Name} for {HitValue} hitpoints!");
                 aPlayer.TakeDamage(HitValue);
             }
             else// There is a 15% chance the enemy will miss completely dealing 0 damage
             {
-                Game.ChangeColor(ConsoleColor.Red, $"\n{Name} misses {aPlayer.Name} and deals 0 damage");
+                ConsoleUtils.ChangeColor(ConsoleColor.Red, $"\n{Name} misses {aPlayer.Name} and deals 0 damage");
             }
         }
         #endregion

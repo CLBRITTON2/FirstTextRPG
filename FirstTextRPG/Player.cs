@@ -33,8 +33,8 @@ namespace FirstTextRPG
         #region Method: Player combat system
         public void Battle(Character anEnemy)
         {
-            Game.ChangeColor(ConsoleColor.Yellow, "(Select an option from the menu to continue)");
-            Game.ChangeColor(ConsoleColor.Yellow, "\n1) Attack \n2) Attempt special attack \n3) Defend \n4) Heal");
+            ConsoleUtils.ChangeColor(ConsoleColor.Yellow, "(Select an option from the menu to continue)");
+            ConsoleUtils.ChangeColor(ConsoleColor.Yellow, "\n1) Attack \n2) Attempt special attack \n3) Defend \n4) Heal");
             Console.WriteLine($"__________________");
 
             ConsoleKeyInfo keyInfo = Console.ReadKey(true);
@@ -58,7 +58,7 @@ namespace FirstTextRPG
 
                     if (HitPoints == MaxHitPoints)
                     {
-                        Game.ChangeColor(ConsoleColor.DarkRed, $"\nYour hitpoints cannot exceed {MaxHitPoints}"); // Ensures the player doesn't heal over max HP
+                        ConsoleUtils.ChangeColor(ConsoleColor.DarkRed, $"\nYour hitpoints cannot exceed {MaxHitPoints}"); // Ensures the player doesn't heal over max HP
                     }
                     else
                     {
@@ -67,7 +67,7 @@ namespace FirstTextRPG
                     break;
 
                 default:
-                    Game.ChangeColor(ConsoleColor.DarkRed, "\nInvalid entry. Please choose a number 1-4");
+                    ConsoleUtils.ChangeColor(ConsoleColor.DarkRed, "\nInvalid entry. Please choose a number 1-4");
                     Battle(anEnemy); //Sends player back to attack menu to select a valid option
                     break;
             }
@@ -80,7 +80,8 @@ namespace FirstTextRPG
         private void Heal(int healthPlus)
         {
             HitPoints += healthPlus;
-            Game.ChangeColor(ConsoleColor.Green, $"\n{Name} has healed for {healthPlus} hitpoints.");
+            ConsoleUtils.ChangeColor(ConsoleColor.Green, $"\n{Name} has healed for {healthPlus} hitpoints.");
+
         }
         #endregion
 
@@ -88,7 +89,7 @@ namespace FirstTextRPG
         private void Defend(bool isDefending)
         {
             HitValue = 0; // Enemy will hit 0 by default if player is defending
-            Game.ChangeColor(ConsoleColor.Green, $"{Name} defends against the enemy attack and recieves no damage.");
+            ConsoleUtils.ChangeColor(ConsoleColor.Green, $"{Name} defends against the enemy attack and recieves no damage.");
         }
         #endregion
 
@@ -100,12 +101,12 @@ namespace FirstTextRPG
 
             if (HitPercent <= 90) // Has a 90% chance to deal damage
             {
-                Game.ChangeColor(ConsoleColor.Green, $"\n{Name} hits {anEnemy.Name} for {HitValue} hitpoints!");
+                ConsoleUtils.ChangeColor(ConsoleColor.Green, $"\n{Name} hits {anEnemy.Name} for {HitValue} hitpoints!");
                 anEnemy.TakeDamage(HitValue);
             }
             else // There is a 10% chance the player will miss completely dealing 0 damage
             {
-                Game.ChangeColor(ConsoleColor.Green, $"\n{Name} misses {anEnemy.Name} and deals 0 damage");
+                ConsoleUtils.ChangeColor(ConsoleColor.Green, $"\n{Name} misses {anEnemy.Name} and deals 0 damage");
             }
         }
         #endregion
@@ -115,12 +116,12 @@ namespace FirstTextRPG
         {
             if (HitPercent <= 50) // Has a 50% chance to deal double damage
             {
-                Game.ChangeColor(ConsoleColor.Green, $"\n{Name} uses a special attack hitting {anEnemy.Name} for {HitValue * 2} hitpoints!");
+                ConsoleUtils.ChangeColor(ConsoleColor.Green, $"\n{Name} uses a special attack hitting {anEnemy.Name} for {HitValue * 2} hitpoints!");
                 anEnemy.TakeDamage(HitValue * 2);
             }
             else // There is a 50% chance the player will miss completely dealing 0 damage
             {
-                Game.ChangeColor(ConsoleColor.Green, $"\n{Name} misses {anEnemy.Name} and deals 0 damage");
+                ConsoleUtils.ChangeColor(ConsoleColor.Green, $"\n{Name} misses {anEnemy.Name} and deals 0 damage");
             }
         }
         #endregion
@@ -134,13 +135,13 @@ namespace FirstTextRPG
                 MaxHitPoints += 2;
                 HitValue += 2;
                 Level++;
-                Game.ChangeColor(ConsoleColor.Green, $"Congratulations, you've leveled up! You're now level {Level}");
+                ConsoleUtils.ChangeColor(ConsoleColor.Green, $"Congratulations, you've leveled up! You're now level {Level}");
                 Thread.Sleep(1500);
-                Game.ChangeColor(ConsoleColor.Green, "\nMax HP + 2, Max hit + 2, Level + 1"); // Prints above changes to the player
+                ConsoleUtils.ChangeColor(ConsoleColor.Green, "\nMax HP + 2, Max hit + 2, Level + 1"); // Prints above changes to the player
                 Thread.Sleep(1500);
                 TotalExperience -= ExperienceToNextLevel;
                 ExperienceToNextLevel *= 1.7; // Exp starts at 100 and multiplies 1.7x every time player levels up
-                Game.ChangeColor(ConsoleColor.Green, $"\nExperience to next level: {ExperienceToNextLevel}");
+                ConsoleUtils.ChangeColor(ConsoleColor.Green, $"\nExperience to next level: {ExperienceToNextLevel}");
                 Thread.Sleep(1500);
 
             }

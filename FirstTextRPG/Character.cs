@@ -65,6 +65,7 @@ namespace FirstTextRPG
         #endregion
 
         #region Method: Taking damage
+        // TODO: return a damage value
         public void TakeDamage(int hitValue) // Damage is based off a random number generator
         {
             HitValue = hitValue;
@@ -78,5 +79,19 @@ namespace FirstTextRPG
 
         }
         #endregion
+        public void DealDamage(Character character)
+        {
+            HitPercent = NumberGenerator.Next(1, 100); // Creating rng for missing an attack
+            HitValue = NumberGenerator.Next(1, 5); // Setting a HitValue for enemy
+
+            if (HitPercent <= 85) // Has an 85% chance to deal damage
+            {
+                character.TakeDamage(HitValue);
+            }
+            else// There is a 15% chance the enemy will miss completely dealing 0 damage
+            {
+                ConsoleUtils.ChangeColor(ConsoleColor.Red, $"\n{Name} misses and deals 0 damage");
+            }
+        }
     }
 }
