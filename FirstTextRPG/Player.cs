@@ -35,7 +35,7 @@ namespace FirstTextRPG
         {
             ConsoleUtils.Print(ConsoleColor.Yellow, "\n(Select an option from the menu to continue)");
             ConsoleUtils.Print(ConsoleColor.Yellow, "1) Attack \n2) Attempt special attack \n3) Defend \n4) Heal");
-            ConsoleUtils.Print($"__________________");
+            ConsoleUtils.Print($"__________________", "\n");
 
             ConsoleKeyInfo keyInfo = Console.ReadKey(true);
             Thread.Sleep(1000);

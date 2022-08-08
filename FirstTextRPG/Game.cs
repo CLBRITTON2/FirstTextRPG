@@ -120,9 +120,9 @@ namespace FirstTextRPG
                 }
                 else if (TheMonkey.IsDead && i < 4) // Will cycle through victory progresion method until index hits 4
                 {
-                    ConsoleUtils.TypeLine(ConsoleColor.DarkRed, $"{TheMonkey.Name} has died!");
-
-                    ConsoleUtils.Print(ConsoleColor.Yellow, "(Press any key to continue)");
+                    ConsoleUtils.Print(ConsoleColor.DarkRed, $"\n{TheMonkey.Name} has died!");
+                    Thread.Sleep(1000);
+                    ConsoleUtils.Print(ConsoleColor.Yellow, "\n(Press any key to continue)");
                     Console.ReadKey(true);
 
                     VictoryProgression();
