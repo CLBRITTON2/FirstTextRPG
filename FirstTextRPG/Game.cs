@@ -11,7 +11,7 @@ namespace FirstTextRPG
         #region Class level variables (not smart long term)
         // Class level variables will maike it hard to track down problems in the future
         private List<Enemy> Monkeys; // List of enemy monkeys
-        private Player Player; // Player 1
+        private Player Player;
         private Enemy TheMonkey; // The Index monkey
         private Enemy SpiderMonkey; // Enemy monkey
         private Enemy Baboon; // Enemy monkey
@@ -142,8 +142,7 @@ namespace FirstTextRPG
             {
                 Console.Clear();
                 TheMonkey.DisplayInfo(); // Display current enemy monkey info/health
-                Player.DisplayInfo(); // Displayer current player info/health
-                Console.WriteLine();
+                Player.DisplayInfo(); // Displayer current player info/health               
 
                 Player.Battle(TheMonkey); // Starts with player attacking monkey
                 Thread.Sleep(1000);

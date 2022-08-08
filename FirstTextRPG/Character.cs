@@ -35,7 +35,7 @@ namespace FirstTextRPG
         #region Method: Display char info
         public virtual void DisplayInfo()
         {
-            ConsoleUtils.Print($"{Name}", "\n"); 
+            ConsoleUtils.Print($"\n{Name}", "\n"); 
             ConsoleUtils.Print($"Level: {Level}", "\n");
             ConsoleUtils.Print($"Hitpoints: {HitPoints}", "\n");
             DisplayHitpointsBar();

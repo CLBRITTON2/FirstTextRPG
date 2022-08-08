@@ -33,9 +33,9 @@ namespace FirstTextRPG
         #region Method: Player combat system
         public void Battle(Character anEnemy)
         {
-            ConsoleUtils.Print(ConsoleColor.Yellow, "(Select an option from the menu to continue)");
-            ConsoleUtils.Print(ConsoleColor.Yellow, "\n1) Attack \n2) Attempt special attack \n3) Defend \n4) Heal");
-            Console.WriteLine($"__________________");
+            ConsoleUtils.Print(ConsoleColor.Yellow, "\n(Select an option from the menu to continue)");
+            ConsoleUtils.Print(ConsoleColor.Yellow, "1) Attack \n2) Attempt special attack \n3) Defend \n4) Heal");
+            ConsoleUtils.Print($"__________________");
 
             ConsoleKeyInfo keyInfo = Console.ReadKey(true);
             Thread.Sleep(1000);
