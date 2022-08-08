@@ -28,7 +28,7 @@ namespace FirstTextRPG
         public override void DisplayInfo() // Inherit base class display info, add in what makes an enemy unique.
         {
             Console.ForegroundColor = Color; // Enemy color has the ability to change
-            Console.WriteLine($"{AsciiArt}\n"); // Enemy Ascii art
+            ConsoleUtils.Print($"{AsciiArt}\n"); // Enemy Ascii art
             base.DisplayInfo();
             Console.ResetColor();
         }
@@ -37,18 +37,7 @@ namespace FirstTextRPG
         #region Method: Enemy combat system
         public void Battle(Character aPlayer)
         {
-            HitPercent = NumberGenerator.Next(1, 100); // Creating rng for missing an attack
-            HitValue = NumberGenerator.Next(1, 5); // Setting a HitValue for enemy
-
-            if (HitPercent <= 85) // Has an 85% chance to deal damage
-            {
-                ConsoleUtils.ChangeColor(ConsoleColor.Red, $"\n{Name} hits {aPlayer.Name} for {HitValue} hitpoints!");
-                aPlayer.TakeDamage(HitValue);
-            }
-            else// There is a 15% chance the enemy will miss completely dealing 0 damage
-            {
-                ConsoleUtils.ChangeColor(ConsoleColor.Red, $"\n{Name} misses {aPlayer.Name} and deals 0 damage");
-            }
+            DealDamage(aPlayer);
         }
         #endregion
     }

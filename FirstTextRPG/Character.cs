@@ -28,39 +28,39 @@ namespace FirstTextRPG
             MaxHitPoints = hitPoints; // Assuming that the player will be instanciated with max hitpoints
             Level = level;
             IsAlive = isAlive;
-            NumberGenerator = new Random(); // Instanciate random number generator
+            NumberGenerator = new Random(); // Instantiate random number generator
         }
         #endregion
 
         #region Method: Display char info
         public virtual void DisplayInfo()
         {
-            Console.WriteLine($"{Name}");
-            Console.WriteLine($"Level: {Level}");
-            Console.WriteLine($"Hitpoints: {HitPoints}");
+            ConsoleUtils.Print($"{Name}", "\n"); 
+            ConsoleUtils.Print($"Level: {Level}", "\n");
+            ConsoleUtils.Print($"Hitpoints: {HitPoints}", "\n");
             DisplayHitpointsBar();
-            Console.WriteLine($"__________________");
+            ConsoleUtils.Print($"\n__________________", "\n");
         }
         #endregion
 
         #region Method: HP bar and functionality
         public void DisplayHitpointsBar()
         {
-            Console.Write(""); // Spacer to keep hitpoints bar in bounds
+            ConsoleUtils.Print(""); // Spacer to keep hitpoints bar in bounds
 
             Console.BackgroundColor = ConsoleColor.Green;
             for (int i = 0; i < HitPoints; i++) // For every hitpoint, write out 1 green space
             {
-                Console.Write(" ");
+                ConsoleUtils.Print(" ");
             }
 
             Console.BackgroundColor = ConsoleColor.Red;
             for (double i = HitPoints; i < MaxHitPoints; i++) // For every missing hitpoint, write out 1 red space
             {
-                Console.Write(" ");
+                ConsoleUtils.Print(" ");
             }
             Console.ResetColor();
-            Console.WriteLine($"({HitPoints}/{MaxHitPoints})"); // Display hp/Max hp beside hp bar
+            ConsoleUtils.Print($"({HitPoints}/{MaxHitPoints})"); // Display hp/Max hp beside hp bar
         }
         #endregion
 
@@ -79,6 +79,8 @@ namespace FirstTextRPG
 
         }
         #endregion
+
+        #region Method: Deal damage
         public void DealDamage(Character character)
         {
             HitPercent = NumberGenerator.Next(1, 100); // Creating rng for missing an attack
@@ -86,12 +88,14 @@ namespace FirstTextRPG
 
             if (HitPercent <= 85) // Has an 85% chance to deal damage
             {
+                ConsoleUtils.Print($"\n{Name} hits {character.Name} and deals {HitValue} damage", "\n");
                 character.TakeDamage(HitValue);
             }
-            else// There is a 15% chance the enemy will miss completely dealing 0 damage
+            else// There is a 15% chance the attack will miss completely dealing 0 damage
             {
-                ConsoleUtils.ChangeColor(ConsoleColor.Red, $"\n{Name} misses and deals 0 damage");
+                ConsoleUtils.Print($"\n{Name} misses and deals 0 damage", "\n");
             }
-        }
+        } 
+        #endregion
     }
 }

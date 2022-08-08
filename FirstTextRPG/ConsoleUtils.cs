@@ -6,36 +6,50 @@ using System.Threading.Tasks;
 
 namespace FirstTextRPG
 {
-    static class ConsoleUtils
+    public static class ConsoleUtils
     {
-        #region Method: Type out lines effect
-        public static void TypeLine(ConsoleColor color, string line) // Method to create "typing" visual effect onto console for story line
+        #region Method: Output type out lines effect
+        public static void TypeLine(ConsoleColor color, string typeLine) // Method to create "typing" visual effect onto console for story line
         {
             Console.ForegroundColor = color;
 
-            for (int i = 0; i < line.Length; i++) // Puts a 40ms pause after each character in the line is typed
+            for (int i = 0; i < typeLine.Length; i++) // Puts a 40ms pause after each character in the line is typed
             {
-                Console.Write(line[i]);
-                Thread.Sleep(30);
+                PrintLogic(typeLine[i].ToString());
+                Thread.Sleep(10);
             }
 
             Console.ResetColor();
         }
         #endregion
-        #region Method: Change text color
-        public static void ChangeColor(ConsoleColor color, string text)
+
+        #region Method: Output will just change text color
+        public static void Print(ConsoleColor color, string text, string end = "\n")
         {
             Console.ForegroundColor = color;
-
-            Console.WriteLine(text);
-
+            PrintLogic(text, end);
             Console.ResetColor();
         }
         #endregion
+
+        #region Method: Print default color text
+        public static void Print(string text, string end = "")
+        {
+            PrintLogic(text, end);
+        }
+        #endregion
+
+        #region Method: Print logic with line break
+        private static void PrintLogic(string input, string end = "")
+        {
+            Console.Write(input + end);
+        }
+        #endregion
+
         #region Method: End game
         public static void EndGame()
         {
-            Console.WriteLine("\n(Press any key to exit)");
+            PrintLogic("\n(Press any key to exit)");
             Console.ReadKey(true);
             Environment.Exit(0);
         } 

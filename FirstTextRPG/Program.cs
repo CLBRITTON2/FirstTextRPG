@@ -7,6 +7,7 @@
             Console.Title = "Monkey Mayhem"; // Set title
             Console.WindowHeight = 45;
             Console.WindowWidth = 150;
+            Console.CursorVisible = false;
 
 
             Game newGame = new Game();

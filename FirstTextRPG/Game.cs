@@ -35,10 +35,10 @@ namespace FirstTextRPG
         #region Method: Main menu
         public void MainMenu()
         {
-            Console.WriteLine(AsciiArt.welcome);
-            Console.WriteLine("\nSeems like a nice day to take a trip to the zoo...");
-            ConsoleUtils.ChangeColor(ConsoleColor.Green, "\n(Press 1 to enter the zoo)");
-            ConsoleUtils.ChangeColor(ConsoleColor.Red, "\n(Press 2 to exit)");
+            ConsoleUtils.Print(AsciiArt.welcome);
+            ConsoleUtils.Print("Seems like a nice day to take a trip to the zoo...", "\n");
+            ConsoleUtils.Print(ConsoleColor.Green, "(Press 1 to enter the zoo)");
+            ConsoleUtils.Print(ConsoleColor.Red, "(Press 2 to exit)");
             Console.WriteLine();
 
             ConsoleKeyInfo keyChoice = Console.ReadKey(true);
@@ -57,13 +57,11 @@ namespace FirstTextRPG
         #region Method: Game introduction
         public void Intro()
         {
-            //Thread.Sleep(1500);
-
             ConsoleUtils.TypeLine(ConsoleColor.Yellow, "Greetings adventurer...");
 
             Thread.Sleep(100); // 1 second pause between welcome and enter username prompt
 
-            ConsoleUtils.TypeLine(ConsoleColor.Yellow, "\n\nPlease enter your name: ");
+            ConsoleUtils.TypeLine(ConsoleColor.Yellow, "\nPlease enter your name: ");
             string playerName = Console.ReadLine().Trim(); // Trim helps readability for username as the game calls the username
             Player = new Player(playerName, 20, 1, true); // Instanciates a new player
 
@@ -82,9 +80,8 @@ namespace FirstTextRPG
             ConsoleUtils.TypeLine(ConsoleColor.Yellow, "\nZoo keeper: The mutated monkeys have gone on a rampage and we need someone to help us stop them!"); ;
             ConsoleUtils.TypeLine(ConsoleColor.Yellow, "\nZoo keeper: Will you help us?");
             Thread.Sleep(1500);
-            ConsoleUtils.TypeLine(ConsoleColor.Green, "\n\nType \"YES\" to help the Zoo keeper..");
-            ConsoleUtils.TypeLine(ConsoleColor.Red, "\n\nType \"NO\" to exit...");
-            Console.WriteLine();
+            ConsoleUtils.Print(ConsoleColor.Green, "\nType \"YES\" to help the Zoo keeper..");
+            ConsoleUtils.Print(ConsoleColor.Red, "Type \"NO\" to exit...");
 
             string userChoice = Console.ReadLine().ToUpper();
 
@@ -117,15 +114,15 @@ namespace FirstTextRPG
 
                 if (Player.IsDead)
                 {
-                    ConsoleUtils.ChangeColor(ConsoleColor.DarkRed, $"\nOh dear! You're dead!");
+                    ConsoleUtils.Print(ConsoleColor.DarkRed, $"Oh dear! You're dead!");
                     Thread.Sleep(1000);
                     ConsoleUtils.EndGame();
                 }
                 else if (TheMonkey.IsDead && i < 4) // Will cycle through victory progresion method until index hits 4
                 {
-                    ConsoleUtils.ChangeColor(ConsoleColor.DarkRed, $"\n{TheMonkey.Name} has died!");
+                    ConsoleUtils.TypeLine(ConsoleColor.DarkRed, $"{TheMonkey.Name} has died!");
 
-                    ConsoleUtils.ChangeColor(ConsoleColor.Yellow, "\n(Press any key to continue)");
+                    ConsoleUtils.Print(ConsoleColor.Yellow, "(Press any key to continue)");
                     Console.ReadKey(true);
 
                     VictoryProgression();
@@ -180,7 +177,7 @@ namespace FirstTextRPG
             }
             else
             {
-                NextFightPrompt(); // If player doesn't earn 100 exp they won't level up and will continue to the next fight
+                NextFightPrompt(); // If player doesn't earn req exp they won't level up and will continue to the next fight
             }
         }
         #endregion
@@ -191,7 +188,7 @@ namespace FirstTextRPG
             ConsoleUtils.TypeLine(ConsoleColor.Yellow, "\nZoo keeper: Get ready for your next fight!");
 
             Thread.Sleep(1000);
-            ConsoleUtils.ChangeColor(ConsoleColor.Yellow, "\n\n(Press any key to continue)"); // Will continue to next fight when a key is pressed
+            ConsoleUtils.Print(ConsoleColor.Yellow, "\n(Press any key to continue)"); // Will continue to next fight when a key is pressed
             Console.ReadKey(true);
         }
         #endregion
