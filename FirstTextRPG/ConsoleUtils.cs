@@ -17,7 +17,7 @@ namespace FirstTextRPG
             for (int i = 0; i < typeLine.Length; i++) // Puts a 40ms pause after each character in the line is typed
             {
                 PrintLogic(typeLine[i].ToString());
-                Thread.Sleep(10);
+                Thread.Sleep(20);
             }
 
             Console.ResetColor();
