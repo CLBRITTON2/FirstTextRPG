@@ -38,8 +38,8 @@ namespace FirstTextRPG
         {
             ConsoleUtils.Print(AsciiArt.welcome);
             ConsoleUtils.Print("Seems like a nice day to take a trip to the zoo...", "\n");
-            ConsoleUtils.Print(ConsoleColor.Green, "(Press 1 to enter the zoo)");
-            ConsoleUtils.Print(ConsoleColor.Red, "(Press 2 to exit)");
+            string[] mainOptions = {"(Press 1 to enter the zoo)", "(Press 2 to exit)\n" };
+            ConsoleUtils.ArrayPrinter(mainOptions, ConsoleColor.Green, ConsoleColor.Red); 
 
             ConsoleKeyInfo keyChoice = Console.ReadKey(true);
             if (keyChoice.Key == ConsoleKey.D1)
@@ -49,7 +49,7 @@ namespace FirstTextRPG
             }
             else
             {
-                ConsoleUtils.EndGame();
+                ConsoleUtils.EndGame(); // Ends game if 2
             }
         }
         #endregion
@@ -57,11 +57,9 @@ namespace FirstTextRPG
         #region Method: Game introduction
         public void Intro()
         {
-            ConsoleUtils.TypeLine(ConsoleColor.Yellow, "Greetings adventurer...");
+            string[] introDialogue = { "Greetings adventurer...", "\nPlease enter your name: " };
+            ConsoleUtils.ArrayPrinter(introDialogue);
 
-            Thread.Sleep(100); // 1 second pause between welcome and enter username prompt
-
-            ConsoleUtils.TypeLine(ConsoleColor.Yellow, "\nPlease enter your name: ");
             string playerName = Console.ReadLine().Trim(); // Trim helps readability for username as the game calls the username
             Player = new Player(playerName, 20, 1, true); // Instanciates a new player
 
@@ -73,25 +71,25 @@ namespace FirstTextRPG
         public void SituationPrompt(string playerName)
         {
             Console.Clear();
-            Thread.Sleep(1500);
-            ConsoleUtils.TypeLine(ConsoleColor.Yellow, $"Zoo keeper: {playerName}, we need your help!");
-            ConsoleUtils.TypeLine(ConsoleColor.Yellow, "\nZoo keeper: There was a radioactive spill that contaminated the monkey exhibit at our local zoo...");
-            Thread.Sleep(1500);
-            ConsoleUtils.TypeLine(ConsoleColor.Yellow, "\nZoo keeper: The mutated monkeys have gone on a rampage and we need someone to help us stop them!"); ;
-            ConsoleUtils.TypeLine(ConsoleColor.Yellow, "\nZoo keeper: Will you help us?");
-            Thread.Sleep(1500);
-            ConsoleUtils.Print(ConsoleColor.Green, "\nType \"YES\" to help the Zoo keeper..");
-            ConsoleUtils.Print(ConsoleColor.Red, "Type \"NO\" to exit...");
+            string[] situationDialogue = 
+            {
+               $"Zoo keeper: {playerName}, we need your help!",
+               "\nZoo keeper: There was a radioactive spill that contaminated the monkey exhibit at our local zoo...",
+               "\nZoo keeper: The mutated monkeys have gone on a rampage and we need someone to help us stop them!",
+               "\nZoo keeper: Will you help us?"
+            };
+            ConsoleUtils.ArrayPrinter(situationDialogue);
+
+            string[] situationOptions = { "\nType \"YES\" to help the Zoo keeper..", "\nType \"NO\" to exit...\n" };
+            ConsoleUtils.ArrayPrinter(situationOptions, ConsoleColor.Green, ConsoleColor.Red);
 
             string userChoice = Console.ReadLine().ToUpper();
 
             if (userChoice == "YES")
             {
                 Console.Clear();
-
-                ConsoleUtils.TypeLine(ConsoleColor.Yellow, "Zoo keeper: Here comes your first opponent! Get ready!");
-                Thread.Sleep(1000);
-
+                ConsoleUtils.TypeLine(ConsoleColor.Yellow, "Zoo keeper: Here comes your first opponent! Get ready! \n");
+                ConsoleUtils.Continue();
                 Console.Clear();
                 GameLoop(); // If user chooses to help zoo keeper.. They enter the game loop.
             }
@@ -114,16 +112,16 @@ namespace FirstTextRPG
 
                 if (Player.IsDead)
                 {
+                    Console.Clear();
                     ConsoleUtils.Print(ConsoleColor.DarkRed, $"Oh dear! You're dead!");
-                    Thread.Sleep(1000);
+                    ConsoleUtils.Continue();
                     ConsoleUtils.EndGame();
                 }
                 else if (TheMonkey.IsDead && i < 4) // Will cycle through victory progresion method until index hits 4
                 {
-                    ConsoleUtils.Print(ConsoleColor.DarkRed, $"\n{TheMonkey.Name} has died!");
-                    Thread.Sleep(1000);
-                    ConsoleUtils.Print(ConsoleColor.Yellow, "\n(Press any key to continue)");
-                    Console.ReadKey(true);
+                    Console.Clear();
+                    ConsoleUtils.Print(ConsoleColor.DarkRed, $"{TheMonkey.Name} has died!");
+                    ConsoleUtils.Continue();
 
                     VictoryProgression();
                 }
@@ -145,10 +143,9 @@ namespace FirstTextRPG
                 Player.DisplayInfo(); // Displayer current player info/health               
 
                 Player.Battle(TheMonkey); // Starts with player attacking monkey
-                Thread.Sleep(1000);
 
                 TheMonkey.Battle(Player);// Monkey attacks back
-                Thread.Sleep(1000);
+                ConsoleUtils.Continue();
 
                 if (TheMonkey.IsDead || Player.IsDead) // Checks to see if player/enemy are dead after combat
                 {
@@ -162,11 +159,11 @@ namespace FirstTextRPG
         private void VictoryProgression() // In the case that a player kills a monkey / will happen every time
         {
             Console.Clear();
-            ConsoleUtils.TypeLine(ConsoleColor.Yellow, $"Zoo keeper: Well done! You've defeated {TheMonkey.Name} and recieve {TheMonkey.ExpValue} exp!");
+            ConsoleUtils.TypeLine(ConsoleColor.Yellow, $"Zoo keeper: Well done! You've defeated {TheMonkey.Name} and recieve {TheMonkey.ExpValue} exp!\n");
 
             double expGain = TheMonkey.ExpValue; // Sets monkey exp value to the exp that the player will gain for killing monkey
             Player.TotalExperience += expGain; // Tracks player's total exp
-            Thread.Sleep(1000);
+            ConsoleUtils.Continue();
 
 
             if (Player.TotalExperience >= Player.ExperienceToNextLevel) // Player will level up if they've met experience requirement
@@ -184,11 +181,9 @@ namespace FirstTextRPG
         #region Method: Next fight prompt
         private void NextFightPrompt()
         {
-            ConsoleUtils.TypeLine(ConsoleColor.Yellow, "\nZoo keeper: Get ready for your next fight!");
-
-            Thread.Sleep(1000);
-            ConsoleUtils.Print(ConsoleColor.Yellow, "\n(Press any key to continue)"); // Will continue to next fight when a key is pressed
-            Console.ReadKey(true);
+            Console.Clear();
+            ConsoleUtils.TypeLine(ConsoleColor.Yellow, "Zoo keeper: Get ready for your next fight!\n");
+            ConsoleUtils.Continue();
         }
         #endregion
 
@@ -196,10 +191,13 @@ namespace FirstTextRPG
         private void WinTheGame()
         {
             Console.Clear();
-            ConsoleUtils.TypeLine(ConsoleColor.Yellow, $"Zoo keeper: Great job {Player.Name}!");
-            ConsoleUtils.TypeLine(ConsoleColor.Yellow, $"\nZoo keeper: You managed to save the zoo by defeating all of the contaminated monkeys!");
-            ConsoleUtils.TypeLine(ConsoleColor.Yellow, $"\nZoo keeper: Thank you so much for your help!");
-            Thread.Sleep(1000);
+            string[] winDialogue =
+            {
+                $"Zoo keeper: Great job {Player.Name}!",
+                "\nZoo keeper: You managed to save the zoo by defeating all of the contaminated monkeys!",
+                "\nZoo keeper: Thank you so much for your help!"
+            };
+            ConsoleUtils.ArrayPrinter(winDialogue);
             ConsoleUtils.EndGame();
         }
         #endregion

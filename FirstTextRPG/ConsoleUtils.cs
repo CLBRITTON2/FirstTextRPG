@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Timers;
 
 namespace FirstTextRPG
 {
@@ -39,18 +40,41 @@ namespace FirstTextRPG
         }
         #endregion
 
-        #region Method: Output text block string array
-        public static void Print(string[] text)
+        #region Method: Array printer w/ 2 colors
+        public static void ArrayPrinter(string[] dialogueBlock, ConsoleColor color1, ConsoleColor color2)
         {
-            string[] textBlock = { };
-            int x = Console.CursorLeft = 0;
+            int x = Console.CursorLeft;
             int y = Console.CursorTop;
-            for (int i = 0; i < textBlock.Length; i++)
+            for (int i = 0; i < dialogueBlock.Length; i++)
             {
                 Console.SetCursorPosition(x, y + i);
-                PrintLogic(textBlock[i], "");
+                if (dialogueBlock[i] == dialogueBlock.ElementAt(0))
+                {
+                    ConsoleUtils.Print(color1, dialogueBlock[i], "");
+                }
+                else if (dialogueBlock[i] == dialogueBlock.ElementAt(1))
+                {
+                    ConsoleUtils.Print(color2, dialogueBlock[i], "");
+                }
+
+                else
+                {
+                    ConsoleUtils.Print(dialogueBlock[i]);
+                }
             }
-        } 
+        }
+        #endregion
+
+        #region Method: Array printer w/ TypeLine and yellow text
+        public static void ArrayPrinter(string[] dialogueBlock)
+        {
+            int x = Console.CursorLeft = 0;
+            int y = Console.CursorTop;
+            for (int i = 0; i < dialogueBlock.Length; i++)
+            {
+                ConsoleUtils.TypeLine(ConsoleColor.Yellow, dialogueBlock[i]);
+            }
+        }
         #endregion
 
         #region Method: Print logic with line break
@@ -60,6 +84,13 @@ namespace FirstTextRPG
         }
         #endregion
 
+        #region Method: Continue
+        public static void Continue()
+        {
+            Print(ConsoleColor.Yellow, "\n(Press any key to continue)");
+            Console.ReadKey(true);
+        }
+        #endregion
 
         #region Method: End game
         public static void EndGame()
@@ -67,7 +98,7 @@ namespace FirstTextRPG
             PrintLogic("\n(Press any key to exit)");
             Console.ReadKey(true);
             Environment.Exit(0);
-        } 
+        }
         #endregion
     }
 }

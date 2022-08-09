@@ -34,11 +34,10 @@ namespace FirstTextRPG.Characters
         public void Battle(Character anEnemy)
         {
             ConsoleUtils.Print(ConsoleColor.Yellow, "\n(Select an option from the menu to continue)");
-            ConsoleUtils.Print(ConsoleColor.Yellow, "1) Attack \n2) Attempt special attack \n3) Defend \n4) Heal");
+            ConsoleUtils.Print(ConsoleColor.Yellow, "1) Attack \n2) Attempt special attack \n3) Heal");
             ConsoleUtils.Print($"__________________", "\n");
 
             ConsoleKeyInfo keyInfo = Console.ReadKey(true);
-            Thread.Sleep(1000);
 
             switch (keyInfo.Key)
             {
@@ -50,11 +49,11 @@ namespace FirstTextRPG.Characters
                     SpecialAttack(anEnemy);
                     break;
 
-                case ConsoleKey.D3:
-                    Defend(true); //Turns "isDefending" bool to true, so player will be defending and will execute code in that method
-                    break;
+                //case ConsoleKey.D3:
+                //    Defend(true); //Turns "isDefending" bool to true, so player will be defending and will execute code in that method
+                //    break;
 
-                case ConsoleKey.D4:
+                case ConsoleKey.D3:
                     Heal();
                     break;
 
@@ -85,11 +84,11 @@ namespace FirstTextRPG.Characters
         #endregion
 
         #region Method: Player defends
-        private void Defend(bool isDefending)
-        {
-            HitValue = 0; // Enemy will hit 0 by default if player is defending
-            ConsoleUtils.Print(ConsoleColor.Blue, $"\n{Name} defends against the enemy attack and recieves no damage.");
-        }
+        //private void Defend(bool isDefending)
+        //{
+        //    HitValue = 0; // Enemy will hit 0 by default if player is defending
+        //    ConsoleUtils.Print(ConsoleColor.Blue, $"\n{Name} defends against the enemy attack and recieves no damage.");
+        //}
         #endregion
 
         #region Method: Single attack
@@ -124,13 +123,11 @@ namespace FirstTextRPG.Characters
                 HitValue += 2;
                 Level++;
                 ConsoleUtils.Print(ConsoleColor.Green, $"Congratulations, you've leveled up! You're now level {Level}");
-                Thread.Sleep(1000);
                 ConsoleUtils.Print(ConsoleColor.Green, "Max HP + 2, Max hit + 2, Level + 1"); // Prints above changes to the player
-                Thread.Sleep(1000);
                 TotalExperience -= ExperienceToNextLevel;
                 ExperienceToNextLevel *= 1.7; // Exp starts at 100 and multiplies 1.7x every time player levels up
                 ConsoleUtils.Print(ConsoleColor.Green, $"Experience to next level: {ExperienceToNextLevel}");
-                Thread.Sleep(1000);
+                ConsoleUtils.Continue();
             }
         }
         #endregion
