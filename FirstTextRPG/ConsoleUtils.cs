@@ -23,7 +23,7 @@ namespace FirstTextRPG
         }
         #endregion
 
-        #region Method: Output will just change text color
+        #region Method: Output with colored text
         public static void Print(ConsoleColor color, string text, string end = "\n")
         {
             Console.ForegroundColor = color;
@@ -32,11 +32,25 @@ namespace FirstTextRPG
         }
         #endregion
 
-        #region Method: Print default color text
+        #region Method: Output default color text
         public static void Print(string text, string end = "")
         {
             PrintLogic(text, end);
         }
+        #endregion
+
+        #region Method: Output text block string array
+        public static void Print(string[] text)
+        {
+            string[] textBlock = { };
+            int x = Console.CursorLeft = 0;
+            int y = Console.CursorTop;
+            for (int i = 0; i < textBlock.Length; i++)
+            {
+                Console.SetCursorPosition(x, y + i);
+                PrintLogic(textBlock[i], "");
+            }
+        } 
         #endregion
 
         #region Method: Print logic with line break
@@ -45,6 +59,7 @@ namespace FirstTextRPG
             Console.Write(input + end);
         }
         #endregion
+
 
         #region Method: End game
         public static void EndGame()

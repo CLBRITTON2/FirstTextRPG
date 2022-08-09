@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FirstTextRPG.Characters;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -39,7 +40,6 @@ namespace FirstTextRPG
             ConsoleUtils.Print("Seems like a nice day to take a trip to the zoo...", "\n");
             ConsoleUtils.Print(ConsoleColor.Green, "(Press 1 to enter the zoo)");
             ConsoleUtils.Print(ConsoleColor.Red, "(Press 2 to exit)");
-            Console.WriteLine();
 
             ConsoleKeyInfo keyChoice = Console.ReadKey(true);
             if (keyChoice.Key == ConsoleKey.D1)

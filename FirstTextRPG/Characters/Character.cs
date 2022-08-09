@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FirstTextRPG
+namespace FirstTextRPG.Characters
 {
     internal class Character
     {
@@ -35,7 +35,7 @@ namespace FirstTextRPG
         #region Method: Display char info
         public virtual void DisplayInfo()
         {
-            ConsoleUtils.Print($"\n{Name}", "\n"); 
+            ConsoleUtils.Print($"\n{Name}", "\n");
             ConsoleUtils.Print($"Level: {Level}", "\n");
             ConsoleUtils.Print($"Hitpoints: {HitPoints}", "\n");
             DisplayHitpointsBar();
@@ -81,6 +81,7 @@ namespace FirstTextRPG
         #endregion
 
         #region Method: Deal damage
+        // TODO return a damage value
         public void DealDamage(Character character)
         {
             HitPercent = NumberGenerator.Next(1, 100); // Creating rng for missing an attack
@@ -95,7 +96,7 @@ namespace FirstTextRPG
             {
                 ConsoleUtils.Print($"\n{Name} misses and deals 0 damage", "\n");
             }
-        } 
+        }
         #endregion
     }
 }

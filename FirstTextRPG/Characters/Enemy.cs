@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FirstTextRPG
+namespace FirstTextRPG.Characters
 {
     internal class Enemy : Character
     {
